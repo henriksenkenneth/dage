@@ -10,8 +10,8 @@ function init(){
 
 function setStartDate (){
 	$(document).ready(function(){
-		$('#datepicker').datepicker({ 
-		});
+		//$('#datepicker').datepicker({ });
+		$('#datepicker').datepicker({ }).attr('readonly','readonly');
 		var myDate = new Date();
 		var month = myDate.getMonth() + 1;
 		var prettyDate = month + '/' + myDate.getDate() + '/' + myDate.getFullYear();
@@ -21,7 +21,8 @@ function setStartDate (){
 
 function addCalenderToDateField(){
 	$( function() {
-		$( "#datepicker" ).datepicker();
+		$( "#datepicker" ).datepicker(	
+		);
 	} );
 }
 
@@ -31,8 +32,6 @@ function message () {
 	$("#textArea").css("padding", "15px", "32px");
 	$("#textArea").css("border-radius", "8px");
 	$("#textArea").css("width", "300px" );
-	//document.getElementById("textArea").style.width = "300px";
-	// get number of days since startDate, use this to select correct xml-file and wanted entry
 	var dayNumber = diffDays($('#datepicker').val());
 	var fileURL = "";
 	var fileNumber = parseInt(dayNumber/10, 10);
@@ -50,9 +49,8 @@ function message () {
 				success: function(xml) {
 					$(xml).find('Vits').each(function(){
 						var tempVits = $(this);
-						// check if Title = i? Ønsket nummer på Title
 						$(this).find("Title").each(function(){
-							if(parseInt($(this).text(), 10)  == entryInFileNumber){ // if Title = i, add text to html
+							if(parseInt($(this).text(), 10)  == entryInFileNumber){ // if Title = last digit(s) of daynumber, add text to html
 								var sText = tempVits.find("Text").text();
 								$("#textArea").text(sText);
 								return;
