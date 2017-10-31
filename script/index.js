@@ -6,8 +6,15 @@ function init(){
 	button.addEventListener('click', message, true); 
 	addCalenderToDateField();
 	setStartDate();	
+	setSizes();
 }
-
+function setSizes () {
+	// get screen witdth
+	var screenWidth = $( window ).width();	// Returns width of browser viewport
+	if ( screenWidth > 1000 ) {
+		$("#box").width(screenWidth/2);	// set box width
+	}		
+}
 function setStartDate (){
 	$(document).ready(function(){
 		//$('#datepicker').datepicker({ });
@@ -31,7 +38,7 @@ function message () {
 	$("#textArea").css("background", "yellow");
 	$("#textArea").css("padding", "15px", "32px");
 	$("#textArea").css("border-radius", "8px");
-	$("#textArea").css("width", "300px" );
+	setSizes();
 	var dayNumber = diffDays($('#datepicker').val());
 	var fileURL = "";
 	var fileNumber = parseInt(dayNumber/10, 10);
